@@ -39,6 +39,21 @@ resource "aws_s3_bucket" "financials" {
 
 }
 
+resource "aws_s3_bucket" "data_testtt" {
+  # bucket is public
+  # bucket is not encrypted
+  # bucket does not have access logs
+  # bucket does not have versioning
+  bucket        = "${local.resource_prefix.value}-data"
+  region        = "us-west-2"
+  acl           = "public-read"
+  force_destroy = true
+  tags = {
+    Name        = "${local.resource_prefix.value}-data"
+    Environment = local.resource_prefix.value
+  }
+}
+
 resource "aws_s3_bucket" "operations" {
   # bucket is not encrypted
   # bucket does not have access logs
