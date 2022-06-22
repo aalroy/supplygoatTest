@@ -9,6 +9,7 @@ resource "aws_s3_bucket" "data" {
   force_destroy = true
   tags = {
     Name        = "${local.resource_prefix.value}-data"
+    
     Environment = local.resource_prefix.value
   }
 }
@@ -16,6 +17,7 @@ resource "aws_s3_bucket" "data" {
 resource "aws_s3_bucket_object" "data_object" {
   bucket = aws_s3_bucket.data.id
   region        = "us-west-2"
+  
   key    = "customer-master.xlsx"
   source = "resources/customer-master.xlsx"
   tags = {
@@ -62,6 +64,7 @@ resource "aws_s3_bucket" "data_science" {
   region        = "us-west-2"
   acl    = "private"
   versioning {
+    
     enabled = true
   }
   logging {
